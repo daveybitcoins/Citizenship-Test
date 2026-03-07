@@ -1,0 +1,10 @@
+{
+  "name": "U.S. Citizenship Test Practice",
+  "short_name": "Civics Test",
+  "description": "Practice for the USCIS Citizenship Civics Test with Spanish explanations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#1a365d",
+  "icons": []
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Practice for the USCIS Citizenship Civics Test with Spanish explanations">
+  <meta name="theme-color" content="#1a365d">
+  <title>U.S. Citizenship Test Practice</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇺🇸</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Screen -->
+    <div id="screen-home" class="screen active">
+      <header class="home-header">
+        <h1>U.S. Citizenship<br>Test Practice</h1>
+        <p class="subtitle">Prepare for the USCIS Civics Test</p>
+      </header>
+
+      <div class="test-selector">
+        <h2>Choose Your Test Version</h2>
+        <button class="test-option" data-test="2008">
+          <span class="test-badge">2008</span>
+          <div class="test-info">
+            <strong>100 Questions</strong>
+            <span>Filed N-400 before Oct 20, 2025</span>
+            <span class="test-detail">10 asked &middot; 6 to pass</span>
+          </div>
+        </button>
+        <button class="test-option" data-test="2025">
+          <span class="test-badge">2025</span>
+          <div class="test-info">
+            <strong>128 Questions</strong>
+            <span>Filed N-400 on/after Oct 20, 2025</span>
+            <span class="test-detail">20 asked &middot; 12 to pass</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="screen-dashboard" class="screen">
+      <header class="dash-header">
+        <button class="btn-back" id="btn-home" aria-label="Back to home">&larr;</button>
+        <h1 id="dash-title">2008 Test</h1>
+        <button class="btn-icon" id="btn-settings" aria-label="Settings">&#9881;</button>
+      </header>
+
+      <div class="progress-summary" id="progress-summary">
+        <div class="progress-ring-container">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="progress-ring-bg" cx="60" cy="60" r="52" />
+            <circle class="progress-ring-fill" id="progress-ring-fill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="progress-ring-text">
+            <span class="progress-pct" id="progress-pct">0%</span>
+            <span class="progress-label">Mastered</span>
+          </div>
+        </div>
+        <div class="progress-stats">
+          <div class="stat">
+            <span class="stat-num" id="stat-mastered">0</span>
+            <span class="stat-label">Mastered</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" id="stat-practice">0</span>
+            <span class="stat-label">Need Practice</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" id="stat-unseen">0</span>
+            <span class="stat-label">Unseen</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="study-modes">
+        <button class="mode-btn" id="btn-study-all">
+          <span class="mode-icon">&#128218;</span>
+          <div>
+            <strong>Study All</strong>
+            <span>Go through all questions by category</span>
+          </div>
+        </button>
+        <button class="mode-btn" id="btn-quiz">
+          <span class="mode-icon">&#9889;</span>
+          <div>
+            <strong>Practice Quiz</strong>
+            <span id="quiz-desc">Simulate the real test</span>
+          </div>
+        </button>
+        <button class="mode-btn" id="btn-missed">
+          <span class="mode-icon">&#128260;</span>
+          <div>
+            <strong>Missed Questions</strong>
+            <span>Review questions you need practice on</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="category-progress" id="category-progress">
+        <h3>Progress by Category</h3>
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Study Screen -->
+    <div id="screen-study" class="screen">
+      <header class="study-header">
+        <button class="btn-back" id="btn-back-study" aria-label="Back to dashboard">&larr;</button>
+        <span class="study-counter" id="study-counter">1 / 100</span>
+        <span class="study-mode-label" id="study-mode-label">Study All</span>
+      </header>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="study-progress-bar"></div>
+      </div>
+
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard">
+          <div class="card-category" id="card-category">American Government</div>
+          <div class="card-subcategory" id="card-subcategory">Principles of American Democracy</div>
+          <div class="card-question" id="card-question">
+            What is the supreme law of the land?
+          </div>
+
+          <div class="card-answer hidden" id="card-answer">
+            <div class="answer-divider"></div>
+            <h3>Answer</h3>
+            <ul id="answer-list">
+              <li>the Constitution</li>
+            </ul>
+          </div>
+
+          <div class="card-spanish hidden" id="card-spanish">
+            <div class="spanish-divider"></div>
+            <h3>Explicaci&oacute;n en Espa&ntilde;ol</h3>
+            <p id="spanish-text"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions" id="card-actions">
+        <button class="btn-primary" id="btn-show-answer">Show Answer</button>
+      </div>
+
+      <div class="card-actions hidden" id="card-actions-assess">
+        <button class="btn-spanish" id="btn-spanish-toggle">
+          Explicar en Espa&ntilde;ol &#127466;&#127480;
+        </button>
+        <div class="assess-buttons">
+          <button class="btn-need-practice" id="btn-need-practice">Need Practice</button>
+          <button class="btn-got-it" id="btn-got-it">Got It!</button>
+        </div>
+      </div>
+
+      <div class="card-nav">
+        <button class="btn-nav" id="btn-prev" aria-label="Previous question">&larr; Prev</button>
+        <button class="btn-nav" id="btn-next" aria-label="Next question">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Quiz Results Screen -->
+    <div id="screen-results" class="screen">
+      <div class="results-container">
+        <div class="results-icon" id="results-icon">&#127881;</div>
+        <h1 id="results-title">Quiz Complete!</h1>
+        <div class="results-score">
+          <span class="score-num" id="results-score">8</span>
+          <span class="score-total" id="results-total">/ 10</span>
+        </div>
+        <p class="results-msg" id="results-msg">You passed! Great job!</p>
+        <div class="results-actions">
+          <button class="btn-primary" id="btn-review-missed">Review Missed Questions</button>
+          <button class="btn-secondary" id="btn-retry-quiz">Try Another Quiz</button>
+          <button class="btn-secondary" id="btn-back-dashboard">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal hidden" id="modal-settings">
+      <div class="modal-backdrop" id="settings-backdrop"></div>
+      <div class="modal-content">
+        <h2>Settings</h2>
+        <div class="setting-row">
+          <label for="setting-auto-spanish">Auto-show Spanish explanations</label>
+          <input type="checkbox" id="setting-auto-spanish" class="toggle">
+        </div>
+        <div class="setting-row">
+          <label for="setting-shuffle">Shuffle questions in Study All</label>
+          <input type="checkbox" id="setting-shuffle" class="toggle">
+        </div>
+        <hr>
+        <button class="btn-danger" id="btn-reset-progress">Reset All Progress</button>
+        <button class="btn-secondary modal-close" id="btn-close-settings">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/questions-2008.js"></script>
+  <script src="js/questions-2025.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
