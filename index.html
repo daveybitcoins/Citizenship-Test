@@ -4,20 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Practice for the USCIS Citizenship Civics Test with Spanish explanations">
-  <meta name="theme-color" content="#1a365d">
+  <meta name="theme-color" content="#0f1b3d">
   <title>U.S. Citizenship Test Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇺🇸</text></svg>">
 </head>
 <body>
+  <div class="patriotic-stripe" aria-hidden="true">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="stripe-blue"></div>
+  </div>
   <div id="app">
     <!-- Home Screen -->
     <div id="screen-home" class="screen active">
-      <header class="home-header">
+      <div class="hero">
+        <div class="hero-stars" aria-hidden="true">
+          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+        </div>
+        <div class="hero-flag" aria-hidden="true">&#127482;&#127480;</div>
         <h1>U.S. Citizenship<br>Test Practice</h1>
         <p class="subtitle">Prepare for the USCIS Civics Test</p>
-      </header>
+      </div>
 
       <div class="test-selector">
         <h2>Choose Your Test Version</h2>
@@ -51,8 +63,14 @@
       <div class="progress-summary" id="progress-summary">
         <div class="progress-ring-container">
           <svg class="progress-ring" viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2563eb" />
+                <stop offset="100%" stop-color="#16a34a" />
+              </linearGradient>
+            </defs>
             <circle class="progress-ring-bg" cx="60" cy="60" r="52" />
-            <circle class="progress-ring-fill" id="progress-ring-fill" cx="60" cy="60" r="52" />
+            <circle class="progress-ring-fill" id="progress-ring-fill" cx="60" cy="60" r="52" stroke="url(#ring-gradient)" />
           </svg>
           <div class="progress-ring-text">
             <span class="progress-pct" id="progress-pct">0%</span>
@@ -119,24 +137,28 @@
 
       <div class="flashcard-container">
         <div class="flashcard" id="flashcard">
-          <div class="card-category" id="card-category">American Government</div>
-          <div class="card-subcategory" id="card-subcategory">Principles of American Democracy</div>
-          <div class="card-question" id="card-question">
-            What is the supreme law of the land?
-          </div>
+          <div style="padding: 28px 24px;">
+            <div class="card-category" id="card-category">American Government</div>
+            <div class="card-subcategory" id="card-subcategory">Principles of American Democracy</div>
+            <div class="card-question" id="card-question">
+              What is the supreme law of the land?
+            </div>
 
-          <div class="card-answer hidden" id="card-answer">
-            <div class="answer-divider"></div>
-            <h3>Answer</h3>
-            <ul id="answer-list">
-              <li>the Constitution</li>
-            </ul>
-          </div>
+            <div class="card-answer hidden" id="card-answer">
+              <div class="answer-divider"></div>
+              <h3>Answer</h3>
+              <ul id="answer-list">
+                <li>the Constitution</li>
+              </ul>
+            </div>
 
-          <div class="card-spanish hidden" id="card-spanish">
-            <div class="spanish-divider"></div>
-            <h3>Explicaci&oacute;n en Espa&ntilde;ol</h3>
-            <p id="spanish-text"></p>
+            <div class="card-spanish hidden" id="card-spanish">
+              <div class="spanish-divider"></div>
+              <div class="card-spanish-inner">
+                <h3>Explicaci&oacute;n en Espa&ntilde;ol</h3>
+                <p id="spanish-text"></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
